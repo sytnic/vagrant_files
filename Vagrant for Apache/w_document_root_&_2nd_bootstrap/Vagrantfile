@@ -1,0 +1,44 @@
+project_slug  = "kassa"
+document_root = "public"
+vm_ip_address = "127.0.0.1"
+
+Vagrant.configure("2") do |config|
+ 
+# config.vm.box - Operating System, можно использовать Vagrant Boxes (app.vagrantup.com)
+# config.vm.network - How your host sees your box, host:port - in browser in main OS
+# config.vm.provider - virtualbox or VMware
+# config.vm.synced_folder - How your access files from your computer
+#                           Как получить доступ к файлам с вашего компьютера
+# config.vm.provision - what we want setup
+
+  config.vm.box = "hashicorp/bionic64"  # "ubuntu/trusty64"
+  config.vm.hostname = project_slug
+    
+  config.vm.network :forwarded_port, guest: 80, host: 4512
+  
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2048
+    ## можно так
+    # vb.memory = 2048  # память
+    # vb.cpus = 4       # ядра
+  end
+  
+  # первая папка - host, текущая; вторая - guest, в linux'e
+  # далее, права на файлы/папки для юзера и группы
+  config.vm.synced_folder "./", "/var/www/#{project_slug}", owner: "vagrant", group: "www-data", mount_options: ["dmode=775,fmode=664"]
+  #config.vm.synced_folder "./", "/var/www/#{project_slug}", type: "nfs"
+  
+  ############
+  # Блок для запуска bootstrap.sh . 
+  # В данном случае используется два варианта. 
+  # Первый для перезаписи уже созданной БД при первоначальном запуске второго варианта.
+  #
+  
+  # не запускал, создавался для изменения имени базы данных, ее пользователя, пароля.
+  #config.vm.provision :shell, path: "bootstrap_mysql.sh", :args => "Vagrant #{project_slug} #{document_root}"
+    
+  # можно временно отключать решеткой # , чтобы не перезаписывать настройки БД и системы.  
+  config.vm.provision :shell, path: "bootstrap.sh", :args => "Vagrant #{project_slug} #{document_root}"
+  #config.vm.provision :shell, inline: ""
+  
+end

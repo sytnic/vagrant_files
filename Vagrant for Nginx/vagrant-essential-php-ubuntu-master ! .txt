@@ -1,0 +1,9 @@
+Nginx. Вариант с использованием скриптов и папок.
+
+Для vagrant-essential-php-ubuntu
+не ставится php7.2, получается установить php7.0
+
+в etc/nginx/sites-enabled файл default нужно поменять строчку php7.2-fpm.sock на php7.0-fpm.sock
+
+посмотреть логи nginx
+sudo  tail -f /var/log/nginx/error.log

@@ -1,0 +1,1 @@
+{"virtualbox":{"/var/www":{"create":true,"group":"www-data","owner":"www-data","guestpath":"/var/www","hostpath":"E:/Projects/project8","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"E:/Projects/project8","disabled":false,"__vagrantfile":true}}}
