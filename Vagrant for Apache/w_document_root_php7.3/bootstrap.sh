@@ -177,5 +177,11 @@ mv composer.phar /usr/local/bin/composer
 #curl -sL https://deb.nodesource.com/setup_10.x | bash
 #apt-get install -y nodejs
 
+## Возможно, надо так 
+# (https://www.hostinger.com.ua/rukovodstva/kak-ustanovit-node-js-npm-ubuntu)
+# sudo apt update
+# sudo apt install nodejs
+# sudo apt install npm
+
 # ==============================================================================
 # ==============================================================================
